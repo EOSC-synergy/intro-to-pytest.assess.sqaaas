@@ -1,0 +1,42 @@
+config:
+  credentials: []
+  project_repos:
+    github.com/EOSC-synergy/sqaaas-tooling:
+      branch: release/2.0.0
+      repo: https://github.com/EOSC-synergy/sqaaas-tooling
+    github.com/pluralsight/intro-to-pytest:
+      branch: master
+      repo: https://github.com/pluralsight/intro-to-pytest
+environment:
+  JPL_DOCKERFORCEBUILD: enabled
+  JPL_KEEPGOING: enabled
+sqa_criteria:
+  QC.Acc:
+    repos:
+      github.com/pluralsight/intro-to-pytest git:
+        commands:
+        - /usr/bin/env sh .sqa/script.wiggy-mauve-mammoth.sh
+        container: qc.acc_skanky-amber-insect
+  QC.Doc:
+    repos:
+      github.com/pluralsight/intro-to-pytest find_doc_files.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.beady-russet-hyrax.sh
+        container: qc.doc_bluesy-carmine-tang
+      github.com/pluralsight/intro-to-pytest git:
+        commands:
+        - /usr/bin/env sh .sqa/script.hazy-red-dachshund.sh
+        container: qc.doc_slaphappy-lavender-chipmunk
+  QC.Lic:
+    repos:
+      github.com/pluralsight/intro-to-pytest licensee:
+        commands:
+        - /usr/bin/env sh .sqa/script.wiggy-linen-zonkey.sh
+        container: qc.lic_lumpy-orchid-albatross
+  QC.Ver:
+    repos:
+      github.com/pluralsight/intro-to-pytest get_git_tags.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.lanky-vermilion-mole.sh
+        container: qc.ver_chummy-mauve-chinchilla
+timeout: 5400
